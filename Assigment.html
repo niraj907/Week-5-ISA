@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Moviecom</title>
+</head>
+<body>
+	<h1>Movies7.io</h1>
+	<input type="text" id="Title" placeholder="search.....">
+	<button onclick="Niraj()">Search</button>
+	<div id="Data"></div>
+
+	<script>
+        const apiKey = 'b4cdfba7'; 
+
+async function Niraj() {
+  const movieTitle = document.getElementById('Title').value.trim();
+  const url = `https://www.omdbapi.com/?t=${Title}&apikey=${apiKey}`;
+
+  
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    if (data.Response === 'False') {
+      document.getElementById('Data').innerHTML = `<p>${data.Error}</p>`;
+    } else {
+      const moviecom = `
+        <h2>${data.Title}</h2>
+        <img src="${data.Poster}" alt="${data.Title} Poster">
+        <p>Released: ${data.Released}</p>
+        <p>Runtime: ${data.Runtime}</p>
+        <p>Actors: ${data.Actors}</p>
+        <p>ImdbRating: ${data.imdbRating}</p>
+      `;
+      document.getElementById('movieData').innerHTML = moviecom;
+    }
+  } catch (error) {
+    document.getElementById('movieData').innerHTML = `<p>An error occurred: ${error}</p>`;
+    
+  }
+}
+    </script>
+</body>
+</html>
